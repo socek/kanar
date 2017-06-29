@@ -18,3 +18,5 @@ dist
 .baelfire.report
 .cache
 .tox
+graph.dot
+graph.png

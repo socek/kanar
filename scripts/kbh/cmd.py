@@ -13,7 +13,8 @@ class KbhApplication(Application):
     core_cls = KbhCore
 
     containers = {
-        'backend': 'kbh.docker:BackendContainer',
+        'backend': 'kbh.containers:RunBackendContainer',
+        'nginx': 'kbh.containers:RunNginxContainer',
     }
 
     def create_parser(self):
