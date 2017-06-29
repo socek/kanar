@@ -1,0 +1,24 @@
+version: '2'
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/code:/code
+
+  nginx:
+    build: ./nginx
+    depends_on:
+      - backend
+    volumes:
+      - ./nginx/logs:/logs
+    networks:
+      adhesive_net:
+        ipv4_address: 169.253.0.240
+
+networks:
+  kamar_net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 169.253.0.0/16
+         gateway: 169.253.0.1
