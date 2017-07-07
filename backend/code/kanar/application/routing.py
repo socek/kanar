@@ -1,11 +1,9 @@
-from pluton.plug.routing import Routing
+from kanar.application.base.routing import Routing
 
 
-class PlutonRouting(Routing):
+class KanarRouting(Routing):
 
     def make(self):
         super().make()
-        self.read_from_dotted('pluton.dashboard:routing.yaml')
-        self.read_from_dotted('pluton.api:routing.yaml')
-        self.read_from_dotted('pluton.event:routing.yaml')
-        self.read_from_dotted('pluton.endpoint:routing.yaml')
+        self.read_from_file(self.paths.get('app:home:routing'))
+

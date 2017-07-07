@@ -44,11 +44,6 @@ class Routing(object):
         for route in parser.parse():
             self.add(**route)
 
-    def read_from_dotted(self, path):
-        self.read_from_file(
-            self.paths.get_path_dotted(path)
-        )
-
     def add(self, controller, route, url, *args, **kwargs):
         self.config.add_route(
             route,

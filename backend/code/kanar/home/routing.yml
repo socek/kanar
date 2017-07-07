@@ -1,0 +1,6 @@
+kanar.home.controllers:
+  -
+    controller: HomeController
+    route: home
+    url: /
+
