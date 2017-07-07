@@ -4,6 +4,9 @@ services:
     build: ./backend
     volumes:
       - ./backend/code:/code
+    command: pserve backend.ini --reload
+    networks:
+      kamar_net:
 
   nginx:
     build: ./nginx

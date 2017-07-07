@@ -17,6 +17,7 @@ class KbhCore(Core):
 
             with project.set('backend', 'backend') as backend:
                 backend.set('backend:dockerfile', 'Dockerfile')
+                backend.set('backend:requirements:dev', 'requirements_dev.txt')
 
                 with backend.set('backend:code', 'code') as code:
                     code.set('backend:setuppy', 'setup.py')
@@ -24,9 +25,11 @@ class KbhCore(Core):
 
             with project.set('scripts', 'scripts') as scripts:
                 with scripts.set('kbh', 'kbh') as kbhdir:
+                    kbhdir.set('kbh:core', 'core.py')
                     with kbhdir.set('kbh:templates', 'templates') as templates:
                         templates.set('template:backendini', 'backend.ini.jinja2')
 
+        self.settings['package:name'] = 'kanar'
         self.settings['loggers'] = {
             'loggers': {
                 'keys': 'root, sqlalchemy, alembic',
@@ -61,7 +64,7 @@ class KbhCore(Core):
             },
             'handler_all': {
                 'class': 'FileHandler',
-                'args': "('%%(log_all)s', 'a')",
+                'args': "('/tmp/all.log', 'a')",
                 'level': 'NOTSET',
                 'formatter': 'generic',
             },

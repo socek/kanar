@@ -13,8 +13,8 @@ class BackendContainerBuild(ContainerBuilder):
 
     def create_dependecies(self):
         super().create_dependecies()
-        self.run_before(IniTemplate())
 
+        self.build_if(FileChanged('backend:requirements:dev'))
         self.build_if(FileChanged('backend:setuppy'))
 
 
@@ -22,6 +22,8 @@ class RunBackendContainer(ContainerRunner):
     container_name = 'backend'
 
     def create_dependecies(self):
+        self.run_before(IniTemplate())
+
         self.build_if(TaskRebuilded(BackendContainerBuild()))
         self.build_if(AlwaysTrue())
 
