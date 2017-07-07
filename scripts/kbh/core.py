@@ -10,15 +10,65 @@ class KbhCore(Core):
     def phase_settings(self):
         super().phase_settings()
 
-        self.paths.set('project', self.get_project_dir(), is_root=True)  # TODO: change to generate path
-        self.paths.set('data', 'data', parent='project')
-        self.paths.set('flags_backend', 'flags', parent='data')
-        self.paths.set('backend_dockerfile_flag', 'backend_dockerfile_flag', parent='flags_backend')
+        with self.paths.set('project', self.get_project_dir(), is_root=True) as project:
+            with project.set('data', 'data') as data:
+                with data.set('flags:backend', 'flags') as flags:
+                    flags.set('backend:dockerfile_flag', 'backend_dockerfile_flag')
 
-        self.paths.set('backend', 'backend', parent='project')
-        self.paths.set('backend_dockerfile', 'Dockerfile', parent='backend')
-        self.paths.set('backend_code', 'code', parent='backend')
-        self.paths.set('backend_setuppy', 'setup.py', parent='backend_code')
+            with project.set('backend', 'backend') as backend:
+                backend.set('backend:dockerfile', 'Dockerfile')
+
+                with backend.set('backend:code', 'code') as code:
+                    code.set('backend:setuppy', 'setup.py')
+                    code.set('backend:ini', 'backend.ini')
+
+            with project.set('scripts', 'scripts') as scripts:
+                with scripts.set('kbh', 'kbh') as kbhdir:
+                    with kbhdir.set('kbh:templates', 'templates') as templates:
+                        templates.set('template:backendini', 'backend.ini.jinja2')
+
+        self.settings['loggers'] = {
+            'loggers': {
+                'keys': 'root, sqlalchemy, alembic',
+            },
+            'handlers': {
+                'keys': 'console, all',
+            },
+            'formatters': {
+                'keys': 'generic',
+            },
+            'logger_root': {
+                'level': 'INFO',
+                'handlers': 'console, all',
+            },
+            'logger_sqlalchemy': {
+                'level': 'INFO',
+                'handlers': 'all',
+                'qualname': 'sqlalchemy.engine',
+                'propagate': '0',
+            },
+            'logger_alembic': {
+                'level': 'INFO',
+                'handlers': 'all',
+                'qualname': 'alembic',
+                'propagate': '0',
+            },
+            'handler_console': {
+                'class': 'StreamHandler',
+                'args': '(sys.stderr,)',
+                'level': 'NOTSET',
+                'formatter': 'generic',
+            },
+            'handler_all': {
+                'class': 'FileHandler',
+                'args': "('%%(log_all)s', 'a')",
+                'level': 'NOTSET',
+                'formatter': 'generic',
+            },
+            'formatter_generic': {
+                'format': '%%(asctime)s %%(levelname)-5.5s [%%(name)s][%%(threadName)s] %%(message)s',
+            },
+        }
 
     def get_project_dir(self):
         project_dir = kbh.__file__

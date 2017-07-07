@@ -2,6 +2,9 @@ from setuptools import find_packages
 from setuptools import setup
 
 install_requires = [
+    'pyramid==1.9',
+    'SQLAlchemy==1.1.11',
+    'psycopg2',
 ]
 
 if __name__ == '__main__':

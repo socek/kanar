@@ -7,7 +7,7 @@ class ContainerBuilder(FileTask, SubprocessTask):
 
     @property
     def dockerfile_key(self):
-        return self.container_name + '_dockerfile'
+        return self.container_name + ':dockerfile'
 
     def create_dependecies(self):
         super().create_dependecies()

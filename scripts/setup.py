@@ -2,7 +2,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 install_requires = [
-    'baelfire>=0.5.0',
+    'baelfire>=0.5.1',
 ]
 
 if __name__ == '__main__':
