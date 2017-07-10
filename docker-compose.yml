@@ -8,10 +8,19 @@ services:
     networks:
       kamar_net:
 
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/code:/code
+    command: npm run dev
+    networks:
+      kamar_net:
+
   nginx:
     build: ./nginx
     depends_on:
       - backend
+      - frontend
     volumes:
       - ./nginx/logs:/logs
     networks:

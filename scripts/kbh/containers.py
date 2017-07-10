@@ -18,6 +18,26 @@ class BackendContainerBuild(ContainerBuilder):
         self.build_if(FileChanged('backend:setuppy'))
 
 
+class FrontendContainerBuild(ContainerBuilder):
+    output_name = 'frontend:dockerfile_flag'
+    container_name = 'frontend'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+
+        self.build_if(FileChanged('frontend:packages'))
+
+
+class NginxContainerBuild(ContainerBuilder):
+    output_name = 'nginx:dockerfile_flag'
+    container_name = 'nginx'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+
+        self.build_if(FileChanged('nginx:conf'))
+
+
 class RunBackendContainer(ContainerRunner):
     container_name = 'backend'
 
@@ -28,9 +48,19 @@ class RunBackendContainer(ContainerRunner):
         self.build_if(AlwaysTrue())
 
 
+class RunFrontendContainer(ContainerRunner):
+    container_name = 'frontend'
+
+    def create_dependecies(self):
+        self.build_if(TaskRebuilded(FrontendContainerBuild()))
+        self.build_if(AlwaysTrue())
+
+
 class RunNginxContainer(ContainerRunner):
     container_name = 'nginx'
 
     def create_dependecies(self):
         self.build_if(TaskRebuilded(BackendContainerBuild()))
+        self.build_if(TaskRebuilded(FrontendContainerBuild()))
+        self.build_if(TaskRebuilded(NginxContainerBuild()))
         self.build_if(AlwaysTrue())

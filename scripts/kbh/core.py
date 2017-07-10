@@ -14,6 +14,8 @@ class KbhCore(Core):
             with project.set('data', 'data') as data:
                 with data.set('flags:backend', 'flags') as flags:
                     flags.set('backend:dockerfile_flag', 'backend_dockerfile_flag')
+                    flags.set('frontend:dockerfile_flag', 'frontend_dockerfile_flag')
+                    flags.set('nginx:dockerfile_flag', 'nginx_dockerfile_flag')
 
             with project.set('backend', 'backend') as backend:
                 backend.set('backend:dockerfile', 'Dockerfile')
@@ -22,6 +24,15 @@ class KbhCore(Core):
                 with backend.set('backend:code', 'code') as code:
                     code.set('backend:setuppy', 'setup.py')
                     code.set('backend:ini', 'backend.ini')
+
+            with project.set('frontend', 'frontend') as frontend:
+                with frontend.set('backend:code', 'code') as code:
+                    frontend.set('frontend:dockerfile', 'Dockerfile')
+                    code.set('frontend:packages', 'package.json')
+
+            with project.set('nginx', 'nginx') as nginx:
+                nginx.set('nginx:dockerfile', 'Dockerfile')
+                nginx.set('nginx:conf', 'nginx.conf')
 
             with project.set('scripts', 'scripts') as scripts:
                 with scripts.set('kbh', 'kbh') as kbhdir:
