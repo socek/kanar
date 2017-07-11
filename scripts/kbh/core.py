@@ -26,7 +26,7 @@ class KbhCore(Core):
                     code.set('backend:ini', 'backend.ini')
 
             with project.set('frontend', 'frontend') as frontend:
-                with frontend.set('backend:code', 'code') as code:
+                with frontend.set('frontend:code', 'code') as code:
                     frontend.set('frontend:dockerfile', 'Dockerfile')
                     code.set('frontend:packages', 'package.json')
 
