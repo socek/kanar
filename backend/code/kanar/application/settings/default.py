@@ -34,6 +34,10 @@ def project(settings, paths):
         with code.set('src', 'kanar') as src:
             with src.set('app:home', 'home') as home:
                 home.set('app:home:routing', 'routing.yml')
+
+            with src.set('app:auth', 'auth') as auth:
+                auth.set('app:auth:routing', 'routing.yml')
+
         code.set('data', 'data')
 
 

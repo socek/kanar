@@ -1,0 +1,13 @@
+kanar.auth.controllers:
+  -
+    controller: LoginController
+    route: auth:login
+    url: /auth/login
+  -
+    controller: LogoutController
+    route: auth:logout
+    url: /auth/logout
+  -
+    controller: AuthDataController
+    route: auth:data
+    url: /auth
