@@ -2,13 +2,12 @@
   <div class="hello">
     This is creazy.
     <h1>|{{ message }}|</h1>
-    <alert type="success">
-      CZABO
-    </alert>
+    <compo></compo>
   </div>
 </template>
 
 <script>
+import compo from './mycomp.vue'
 
 export default {
   name: 'hello',
@@ -31,6 +30,9 @@ export default {
       }
       xhr.send()
     }
+  },
+  components: {
+    compo
   }
 }
 </script>

@@ -6,6 +6,8 @@ import router from './router'
 import alert from 'vue-strap'
 import styles from './assets/dashboard.css'
 
+import sidebar from './components/sidebar'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -13,5 +15,12 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App, alert, styles }
+  components: { App, styles, alert }
+})
+
+new Vue({
+  el: '#sidebar',
+  router,
+  template: '<sidebar/>',
+  components: { sidebar }
 })
