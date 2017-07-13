@@ -1,0 +1,6 @@
+kanar.menu.controllers:
+  -
+    controller: MenuController
+    route: menu
+    url: /menu
+

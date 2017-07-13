@@ -5,6 +5,7 @@ from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
 from kbh.containers import RunBackendContainer
+from kbh.containers import RunFrontendContainer
 from kbh.containers import RunNginxContainer
 from kbh.core import KbhCore
 
@@ -17,6 +18,7 @@ class KbhApplication(Application):
     containers = {
         'backend': RunBackendContainer,
         'nginx': RunNginxContainer,
+        'frontend': RunFrontendContainer,
     }
 
     def create_parser(self):

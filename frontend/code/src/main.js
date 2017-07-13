@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import alert from 'vue-strap'
-import styles from './assets/dashboard.css'
+import './assets/dashboard.css'
 
 import sidebar from './components/sidebar'
 
@@ -15,7 +15,7 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App, styles, alert }
+  components: { App, alert }
 })
 
 new Vue({

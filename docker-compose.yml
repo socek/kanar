@@ -11,6 +11,7 @@ services:
 
   frontend:
     build: ./frontend
+    tty: true
     volumes:
       - ./frontend/code:/code
     command: npm run dev

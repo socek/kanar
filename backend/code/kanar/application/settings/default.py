@@ -1,4 +1,4 @@
-from os.path import dirname
+from kanar.menu.paths import paths_setting
 
 
 def make_settings(settings, paths):
@@ -6,6 +6,7 @@ def make_settings(settings, paths):
     database(settings, paths)
     logger(settings, paths)
     debug(settings, paths)
+    paths_setting(settings, paths)
 
 
 def database(settings, paths):
@@ -24,21 +25,7 @@ def database(settings, paths):
 
 
 def project(settings, paths):
-    def get_project_dir(dirs):
-        project_dir = __file__
-        for index in range(dirs):
-            project_dir = dirname(project_dir)
-        return project_dir
-
-    with paths.set('code', get_project_dir(4)) as code:
-        with code.set('src', 'kanar') as src:
-            with src.set('app:home', 'home') as home:
-                home.set('app:home:routing', 'routing.yml')
-
-            with src.set('app:auth', 'auth') as auth:
-                auth.set('app:auth:routing', 'routing.yml')
-
-        code.set('data', 'data')
+    settings['secret'] = 'asdasdasdasdweq312iuashi1u2h13o2'
 
 
 def debug(settings, paths):

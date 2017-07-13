@@ -7,4 +7,5 @@ ipython==6.1.0
 ipdb==0.10.3
 waitress==1.0.2
 morfdict==0.4.5
-pyramid_debugtoolbar
+pyramid-debugtoolbar==4.2.1
+bcrypt==3.1.3
