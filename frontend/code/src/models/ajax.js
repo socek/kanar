@@ -10,7 +10,7 @@ class AjaxView {
   }
 
   run (url) {
-    axios.get(url, {
+    return axios.get(url, {
       responseType: 'json'}
     ).then(this.fillWidget)
     .catch(this.showError)

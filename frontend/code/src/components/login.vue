@@ -8,8 +8,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  // import main from '../main'
+  import AjaxView from '../models/ajax'
 
   export default {
     data () {
@@ -18,33 +17,25 @@
       }
     },
     created: function () {
-      this.fetchData()
+      var self = this
+      new AjaxView(function (response) {
+        self.is_authenticated = response.data.is_authenticated
+      }).run('/api/auth').then(self.fillWidget)
     },
     methods: {
-      ajax: function (url, after) {
-        return axios.get(url, {
-          responseType: 'json'}
-        ).then(this.fillWidget)
-        .catch(this.showError)
-      },
-      fillWidget: function (response) {
-        this.is_authenticated = response.data.is_authenticated
-      },
-      showError: function (error) {
-        console.log(error)
-      },
-      // real methods
-      fetchData: function () {
-        this.ajax('/api/auth')
-        // console.log(main.sidebarWidget.menu)
-      },
       login: function (event) {
         event.preventDefault()
-        this.ajax('/api/auth/login').then(this.after)
+        var self = this
+        new AjaxView(function (response) {
+          self.menu = response.data.menu
+        }).run('/api/auth/login').then(this.after)
       },
       logout: function (event) {
         event.preventDefault()
-        this.ajax('/api/auth/logout').then(this.after)
+        var self = this
+        new AjaxView(function (response) {
+          self.menu = response.data.menu
+        }).run('/api/auth/logout').then(this.after)
       },
       after: function (event) {
         location.reload()
