@@ -7,29 +7,51 @@ from kanar.application.base.controller import JsonController
 from kanar.auth.forms import LoginForm
 
 
-class LoginController(JsonController):
-
-    def _create_form(self, cls):
-        return Form(cls(), use_ajax=True)
+class FormController(JsonController):
+    form_cls = None
 
     def make(self):
-        form = self._create_form(LoginForm)
-        self.context['fields'] = data = self.request.json_body
+        self.context['form_error'] = ''
+        data = self.context['fields'] = self.request.json_body
+        form = Form(self.form_cls(), use_ajax=True)
+
         try:
-            data = self._validate_form(form, data)
+            self.validate_form(form, data)
+            for key, value in data.items():
+                data[key]['error'] = ''
         except ValidationFailure as error:
             self.context['validate'] = False
-            for key, value in error.error.asdict().items():
-                data[key]['error'] = value
+            errors = error.error.asdict()
+            for key, value in data.items():
+                data[key]['error'] = errors.get(key, '')
+            self.fail(data)
             return
 
-        self.context['validate'] = True
-        headers = remember(self.request, data['username'])
-        self.request.response.headerlist.extend(headers)
+        self.success(data)
 
-    def _validate_form(self, form, data):
-        data = {key: item['value'] for key, item in data.items()}
-        return form.validate(data.items())
+    def validate_form(self, form, data):
+        data = [(key, item['value']) for key, item in data.items()]
+        return form.validate(data)
+
+    def success(self, data):
+        pass
+
+    def fail(self, data):
+        pass
+
+
+class LoginController(FormController):
+    form_cls = LoginForm
+
+    def success(self, data):
+        if data['username']['value'] != 'socek':
+            self.context['validate'] = False
+            self.context['form_error'] = "Username and/or password do not match."
+        else:
+            self.context['form_error'] = ''
+            self.context['validate'] = True
+            headers = remember(self.request, data['username'])
+            self.request.response.headerlist.extend(headers)
 
 
 class LogoutController(JsonController):

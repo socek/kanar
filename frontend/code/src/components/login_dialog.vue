@@ -4,11 +4,20 @@
       <div class="loginmodal-container">
         <h1>Login to Your Account</h1><br>
         <form v-on:submit.prevent="onSubmit">
+          <div class="form-group has-error" v-if="form.error">
+            <label class="control-label">{{ form.error }}</label>
+          </div>
+
           <div class="form-group" v-bind:class="{ 'has-error': form.fields.username.error }">
             <label class="control-label">{{ form.fields.username.error }}</label>
-            <input type="text" class="form-control" name="user" placeholder="Username" v-model="form.fields.username.value">
+            <input type="text" class="form-control" v-bind:class="{ 'form-control-danger': form.fields.username.error }" placeholder="Username" v-model="form.fields.username.value">
           </div>
-          <input type="password" name="pass" placeholder="Password" v-model="form.fields.password.value">
+
+          <div class="form-group" v-bind:class="{ 'has-error': form.fields.password.error }">
+            <label class="control-label">{{ form.fields.password.error }}</label>
+            <input type="password" class="form-control" placeholder="Password" v-model="form.fields.password.value" v-bind:class="{ 'form-control-danger': form.fields.password.error }">
+          </div>
+
           <input type="submit" name="login" class="login loginmodal-submit" value="Login">
         </form>
 
@@ -27,6 +36,7 @@
     data () {
       return {
         form: {
+          error: null,
           fields: {
             username: {
               error: null,
@@ -56,6 +66,7 @@
             location.reload()
           } else {
             self.form.fields = data.fields
+            self.form.error = data.form_error
           }
         })
       }
@@ -99,9 +110,6 @@
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
   padding: 0 8px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -122,13 +130,9 @@
   font-weight: 700;
   height: 36px;
   padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
 }
 
 .loginmodal-submit {
-  /* border: 1px solid #3079ed; */
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1);
