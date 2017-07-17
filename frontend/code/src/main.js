@@ -7,20 +7,33 @@ import alert from 'vue-strap'
 import './assets/dashboard.css'
 
 import sidebar from './components/sidebar'
+import login from './components/login'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+var appWidget = new Vue({
   el: '#app',
   router,
   template: '<App/>',
   components: { App, alert }
 })
 
-new Vue({
+var loginWidget = new Vue({
+  el: '#login',
+  template: '<login/>',
+  components: { login }
+})
+
+var sidebarWidget = new Vue({
   el: '#sidebar',
-  router,
   template: '<sidebar/>',
   components: { sidebar }
 })
+
+export default {
+  appWidget,
+  sidebarWidget,
+  loginWidget
+}
+

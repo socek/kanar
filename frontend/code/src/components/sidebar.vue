@@ -10,25 +10,19 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        menu: []
-      }
-    },
-    created: function () {
-      this.fetchData()
-    },
-    methods: {
-      fetchData: function () {
-        var xhr = new XMLHttpRequest()
-        var self = this
-        xhr.open('GET', '/api/menu')
-        xhr.onload = function () {
-          self.menu = JSON.parse(xhr.responseText).menu
-        }
-        xhr.send()
-      }
+import AjaxView from '../models/ajax'
+
+export default {
+  data () {
+    return {
+      menu: []
     }
+  },
+  created: function () {
+    var self = this
+    new AjaxView(function (response) {
+      self.menu = response.data.menu
+    }).run('/api/menu')
   }
+}
 </script>

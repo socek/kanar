@@ -50,8 +50,9 @@ class MenuGroup(object):
 
 class Menu(object):
 
-    def __init__(self):
+    def __init__(self, request):
         self.groups = []
+        self.request = request
         self.make_menu()
 
     def add(self, *args, **kwargs):

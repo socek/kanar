@@ -9,7 +9,7 @@ class LoginController(JsonController):
     def make(self):
         headers = remember(self.request, 'editor')
         self.request.response.headerlist.extend(headers)
-        self.context['logged'] = True
+        self.context['is_authenticated'] = True
 
 
 class LogoutController(JsonController):
@@ -17,11 +17,10 @@ class LogoutController(JsonController):
     def make(self):
         headers = forget(self.request)
         self.request.response.headerlist.extend(headers)
+        self.context['is_authenticated'] = False
 
 
 class AuthDataController(JsonController):
-    permission = 'create'
 
     def make(self):
-        self.context['ctrl'] = 'auth'
-        self.context['userid'] = self.request.authenticated_userid
+        self.context['is_authenticated'] = self.request.authenticated_userid is not None
