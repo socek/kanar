@@ -7,7 +7,8 @@ install_requires = [
 
     'psycopg2',
     'morfdict==0.4.5',
-    'pyyaml',
+    'PyYAML==3.12',
+    'deform==2.0.4',
 ]
 
 if __name__ == '__main__':

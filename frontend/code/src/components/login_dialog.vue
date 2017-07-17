@@ -1,40 +1,63 @@
 <template>
-  <div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li v-if="is_authenticated"><a v-on:click="logout" href="#">Logout</a></li>
-        <li v-else><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-      </ul>
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Login to Your Account</h1><br>
+        <form v-on:submit.prevent="onSubmit">
+          <div class="form-group" v-bind:class="{ 'has-error': form.fields.username.error }">
+            <label class="control-label">{{ form.fields.username.error }}</label>
+            <input type="text" class="form-control" name="user" placeholder="Username" v-model="form.fields.username.value">
+          </div>
+          <input type="password" name="pass" placeholder="Password" v-model="form.fields.password.value">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+        </form>
+
+        <!-- <div class="login-help">
+          <a href="#">Register</a> - <a href="#">Forgot Password</a>
+        </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import AjaxView from '../models/ajax'
+  import axios from 'axios'
 
   export default {
     data () {
       return {
-        is_authenticated: false
+        form: {
+          fields: {
+            username: {
+              error: null,
+              value: ''
+            },
+            password: {
+              error: null,
+              value: ''
+            }
+          }
+        }
       }
     },
-    created: function () {
-      var self = this
-      new AjaxView(function (response) {
-        self.is_authenticated = response.data.is_authenticated
-      }).run('/api/auth').then(self.fillWidget)
-    },
     methods: {
-      login: function (event) {
-        event.preventDefault()
-        new AjaxView(this.after).run('/api/auth/login')
-      },
-      logout: function (event) {
-        event.preventDefault()
-        new AjaxView(this.after).run('/api/auth/logout')
-      },
-      after: function (event) {
-        location.reload()
+      onSubmit: function (event) {
+        var self = this
+        axios.post(
+          '/api/auth/login',
+          this.form.fields,
+          {
+            responseType: 'json'
+          }
+        )
+        .then(function (response) {
+          var data = response.data
+          if (data.validate) {
+            location.reload()
+          } else {
+            self.form.fields = data.fields
+          }
+        })
       }
     }
   }
