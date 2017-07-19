@@ -1,3 +1,4 @@
+from colander import Invalid
 from pyramid.httpexceptions import HTTPFound
 
 
@@ -91,3 +92,76 @@ class JsonController(Controller):
 
     def _create_context(self):
         self.context = {}
+
+
+class RestfulController(JsonController):
+
+    @property
+    def methods(self):
+        return {
+            'GET': self.get,
+            'POST': self.post,
+            'PUT': self.put,
+            'PATCH': self.patch,
+            'DELETE': self.delete,
+        }
+
+    def make(self):
+        method = self.methods[self.request.method]
+        method()
+
+    def get(self):
+        pass
+
+    def post(self):
+        pass
+
+    def put(self):
+        pass
+
+    def patch(self):
+        pass
+
+    def delete(self):
+        pass
+
+
+class FormController(RestfulController):
+
+    def prepere_context(self):
+        """
+        Prepere context for returning form data.
+        """
+        self.context['form_error'] = ''
+        self.context['fields'] = self.request.json_body
+        for key, value in self.context['fields'].items():
+            self.context['fields'][key]['error'] = ''
+        return self.context['fields']
+
+    def schema_validated(self, schema, fields):
+        """
+        Validate if data provided are in proper schema.
+        """
+        try:
+            cstruct = self._get_values_dict(fields)
+            schema.deserialize(cstruct)
+            self.context['validate'] = True
+            return True
+        except Invalid as error:
+            self.context['validate'] = False
+            self.parse_errors(fields, error)
+            return False
+
+    def parse_errors(self, fields, error=None):
+        """
+        Parse errors provided by colander and return in our own form format.
+        """
+        errors = error.asdict()
+        for key, value in fields.items():
+            fields[key]['error'] = errors.get(key, '')
+
+    def _get_values_dict(self, fields):
+        """
+        Get "key: value" from provided fields.
+        """
+        return dict((key, item['value']) for key, item in fields.items())

@@ -3,6 +3,6 @@ from colander import SchemaNode
 from colander import String
 
 
-class LoginForm(MappingSchema):
+class LoginSchema(MappingSchema):
     username = SchemaNode(String())
     password = SchemaNode(String())

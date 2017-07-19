@@ -1,57 +1,35 @@
-from deform import Form
-from deform import ValidationFailure
 from pyramid.security import forget
 from pyramid.security import remember
 
 from kanar.application.base.controller import JsonController
-from kanar.auth.forms import LoginForm
-
-
-class FormController(JsonController):
-    form_cls = None
-
-    def make(self):
-        self.context['form_error'] = ''
-        data = self.context['fields'] = self.request.json_body
-        form = Form(self.form_cls(), use_ajax=True)
-
-        try:
-            self.validate_form(form, data)
-            for key, value in data.items():
-                data[key]['error'] = ''
-        except ValidationFailure as error:
-            self.context['validate'] = False
-            errors = error.error.asdict()
-            for key, value in data.items():
-                data[key]['error'] = errors.get(key, '')
-            self.fail(data)
-            return
-
-        self.success(data)
-
-    def validate_form(self, form, data):
-        data = [(key, item['value']) for key, item in data.items()]
-        return form.validate(data)
-
-    def success(self, data):
-        pass
-
-    def fail(self, data):
-        pass
+from kanar.auth.forms import LoginSchema
+from kanar.application.base.controller import FormController
 
 
 class LoginController(FormController):
-    form_cls = LoginForm
 
-    def success(self, data):
-        if data['username']['value'] != 'socek':
-            self.context['validate'] = False
-            self.context['form_error'] = "Username and/or password do not match."
-        else:
-            self.context['form_error'] = ''
-            self.context['validate'] = True
-            headers = remember(self.request, data['username'])
-            self.request.response.headerlist.extend(headers)
+    def post(self):
+        fields = self.prepere_context()
+        schema = LoginSchema()
+
+        if self.schema_validated(schema, fields):
+            if self.authenticated(fields):
+                self.on_success(fields)
+            else:
+                self.on_fail()
+
+    def authenticated(self, fields):
+        return fields['username']['value'] == 'socek'
+
+    def on_success(self, fields):
+        self.context['form_error'] = ''
+        self.context['validate'] = True
+        headers = remember(self.request, fields['username'])
+        self.request.response.headerlist.extend(headers)
+
+    def on_fail(self):
+        self.context['validate'] = False
+        self.context['form_error'] = "Username and/or password do not match."
 
 
 class LogoutController(JsonController):
