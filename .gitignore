@@ -20,3 +20,5 @@ dist
 .tox
 graph.dot
 graph.png
+.p
+venv_*
