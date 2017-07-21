@@ -10,16 +10,14 @@ def make_settings(settings, paths):
 
 
 def database(settings, paths):
-    # ----------------------------------------
-    # This is example postgresql configuration
-    # ----------------------------------------
-    # settings['db:type'] = 'postgresql'
-    # settings['db:login'] = 'develop'
-    # settings['db:password'] = 'develop'
-    # settings['db:host'] = 'localhost'
-    # settings['db:port'] = '5432'
-    settings['db:type'] = 'sqlite'
-    settings['db:name'] = '%(project)s_develop'
+    settings['db:type'] = 'postgresql'
+    settings['db:login'] = 'kanar'
+    settings['db:password'] = 'kanar'
+    settings['db:host'] = 'postgres'
+    settings['db:name'] = 'kanar'
+    settings['db:port'] = '5432'
+    settings['db:options'] = {}
+
     with paths.context('data') as data:
         data.set('sqlite_db', 'data', 'sqlite3.db')
 
