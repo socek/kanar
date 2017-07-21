@@ -1,4 +1,4 @@
-from kanar.menu.paths import paths_setting
+from kanar.application.settings.paths import paths_setting
 
 
 def make_settings(settings, paths):
