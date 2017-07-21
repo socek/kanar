@@ -9,8 +9,8 @@ def database(settings, paths):
     # This is example postgresql configuration
     # ----------------------------------------
     settings['db:type'] = 'postgresql'
-    settings['db:login'] = 'pluton'
-    settings['db:password'] = 'plutonexec'
-    settings['db:host'] = 'localhost'
-    settings['db:name'] = 'pluton'
+    settings['db:login'] = 'kanar'
+    settings['db:password'] = 'kanar'
+    settings['db:host'] = 'postgres'
+    settings['db:name'] = 'kanar'
     settings['db:port'] = '5432'

@@ -18,6 +18,17 @@ class IniTemplate(TemplateTask):
         self.build_if(FileChanged('settings:paths'))
         self.build_if(FileChanged('settings:tests'))
 
+    def generate_context(self):
+        context = super().generate_context()
+        context['sqlalchemy_url'] = '{type}://{login}:{password}@{host}:{port}/{name}'.format(
+            type=self.settings['db:type'],
+            login=self.settings['db:login'],
+            password=self.settings['db:password'],
+            host=self.settings['db:host'],
+            port=self.settings['db:port'],
+            name=self.settings['db:name'])
+        return context
+
 
 class RunDevServer(SubprocessTask):
 

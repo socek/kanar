@@ -6,6 +6,8 @@ services:
     volumes:
       - ./backend/code:/code
     command: backend -t dev
+    depends_on:
+      - postgres
     networks:
       kamar_net:
 
@@ -28,6 +30,20 @@ services:
     networks:
       kamar_net:
         ipv4_address: 169.253.0.240
+
+  postgres:
+    image: postgres:9.4
+    restart: always
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./postgres:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=kanar
+      - POSTGRES_USER=kanar
+      - POSTGRES_DB=kanar
+      - PGPASSWORD=kanar
+    networks:
+      kamar_net:
 
 networks:
   kamar_net:
