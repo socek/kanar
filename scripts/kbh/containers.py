@@ -2,7 +2,6 @@ from baelfire.dependencies import AlwaysTrue
 from baelfire.dependencies import FileChanged
 from baelfire.dependencies import TaskRebuilded
 
-from kbh.backend import IniTemplate
 from kbh.docker import ContainerBuilder
 from kbh.docker import ContainerRunner
 
@@ -42,8 +41,6 @@ class RunBackendContainer(ContainerRunner):
     container_name = 'backend'
 
     def create_dependecies(self):
-        self.run_before(IniTemplate())
-
         self.build_if(TaskRebuilded(BackendContainerBuild()))
         self.build_if(AlwaysTrue())
 

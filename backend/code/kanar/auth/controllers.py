@@ -1,9 +1,9 @@
 from pyramid.security import forget
 from pyramid.security import remember
 
+from kanar.application.base.controller import FormController
 from kanar.application.base.controller import JsonController
 from kanar.auth.forms import LoginSchema
-from kanar.application.base.controller import FormController
 
 
 class LoginController(FormController):

@@ -9,6 +9,7 @@ install_requires = [
     'morfdict==0.4.5',
     'PyYAML==3.12',
     'colander==1.3.3',
+    'alembic==0.9.3',
 ]
 
 if __name__ == '__main__':
