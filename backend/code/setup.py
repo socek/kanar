@@ -11,6 +11,7 @@ install_requires = [
     'colander==1.3.3',
     'alembic==0.9.3',
     'baelfire>=0.5.1',
+    'bcrypt==3.1.3',
 ]
 
 if __name__ == '__main__':

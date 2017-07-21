@@ -1,8 +1,10 @@
 from pyramid.security import forget
 from pyramid.security import remember
+from sqlalchemy.orm.exc import NoResultFound
 
 from kanar.application.base.controller import FormController
 from kanar.application.base.controller import JsonController
+from kanar.auth.driver import UserReadDriver
 from kanar.auth.forms import LoginSchema
 
 
@@ -19,7 +21,13 @@ class LoginController(FormController):
                 self.on_fail()
 
     def authenticated(self, fields):
-        return fields['username']['value'] == 'socek'
+        driver = UserReadDriver(self.request.database)
+        try:
+            user = driver.get_by_name(fields['username']['value'])
+            return user.validate_password(fields['password']['value'])
+        except NoResultFound:
+            # user can not be authenticated if he/she does not exists
+            return False
 
     def on_success(self, fields):
         self.context['form_error'] = ''
