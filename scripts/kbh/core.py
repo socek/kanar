@@ -34,55 +34,7 @@ class KbhCore(Core):
                 nginx.set('nginx:dockerfile', 'Dockerfile')
                 nginx.set('nginx:conf', 'nginx.conf')
 
-            with project.set('scripts', 'scripts') as scripts:
-                with scripts.set('kbh', 'kbh') as kbhdir:
-                    kbhdir.set('kbh:core', 'core.py')
-                    with kbhdir.set('kbh:templates', 'templates') as templates:
-                        templates.set('template:backendini', 'backend.ini.jinja2')
-
         self.settings['package:name'] = 'kanar'
-        self.settings['loggers'] = {
-            'loggers': {
-                'keys': 'root, sqlalchemy, alembic',
-            },
-            'handlers': {
-                'keys': 'console, all',
-            },
-            'formatters': {
-                'keys': 'generic',
-            },
-            'logger_root': {
-                'level': 'INFO',
-                'handlers': 'console, all',
-            },
-            'logger_sqlalchemy': {
-                'level': 'INFO',
-                'handlers': 'all',
-                'qualname': 'sqlalchemy.engine',
-                'propagate': '0',
-            },
-            'logger_alembic': {
-                'level': 'INFO',
-                'handlers': 'all',
-                'qualname': 'alembic',
-                'propagate': '0',
-            },
-            'handler_console': {
-                'class': 'StreamHandler',
-                'args': '(sys.stderr,)',
-                'level': 'NOTSET',
-                'formatter': 'generic',
-            },
-            'handler_all': {
-                'class': 'FileHandler',
-                'args': "('/tmp/all.log', 'a')",
-                'level': 'NOTSET',
-                'formatter': 'generic',
-            },
-            'formatter_generic': {
-                'format': '%%(asctime)s %%(levelname)-5.5s [%%(name)s][%%(threadName)s] %%(message)s',
-            },
-        }
 
     def get_project_dir(self):
         project_dir = kbh.__file__

@@ -10,6 +10,7 @@ install_requires = [
     'PyYAML==3.12',
     'colander==1.3.3',
     'alembic==0.9.3',
+    'baelfire>=0.5.1',
 ]
 
 if __name__ == '__main__':
@@ -24,6 +25,7 @@ if __name__ == '__main__':
                 'main = kanar:main'
             ],
             'console_scripts': [
+                'backend = kanar.commands.cmd:run',
             ]
         },
     )
