@@ -3,6 +3,7 @@ from baelfire.dependencies import FileChanged
 from baelfire.dependencies import TaskRebuilded
 
 from kbh.docker import ContainerBuilder
+from kbh.docker import ContainerCommand
 from kbh.docker import ContainerRunner
 
 
@@ -61,3 +62,8 @@ class RunNginxContainer(ContainerRunner):
         self.build_if(TaskRebuilded(FrontendContainerBuild()))
         self.build_if(TaskRebuilded(NginxContainerBuild()))
         self.build_if(AlwaysTrue())
+
+
+class BackendShell(ContainerCommand):
+    container_name = 'backend'
+    command = 'backend -t shell'

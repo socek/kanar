@@ -4,8 +4,9 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
-from kanar.commands.dev import RunDevServer
+from kanar.commands.bshell import Shell
 from kanar.commands.core import BackendCore
+from kanar.commands.dev import RunDevServer
 
 log = getLogger(__name__)
 
@@ -15,6 +16,7 @@ class BakendApplication(Application):
 
     tasks = {
         'dev': RunDevServer,
+        'shell': Shell,
     }
 
     def create_parser(self):

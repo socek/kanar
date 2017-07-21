@@ -54,6 +54,7 @@ class AlembicUpgrade(Alembic):
 
     def build(self):
         self.alembic('upgrade head')
+        self.touch('sqlite_db')
 
 
 def run_alembic():

@@ -1,3 +1,4 @@
+from baelfire.dependencies import AlwaysTrue
 from baelfire.dependencies import FileChanged
 from baelfire.task.file import FileTask
 from baelfire.task.process import SubprocessTask
@@ -23,3 +24,14 @@ class ContainerRunner(SubprocessTask):
 
     def build(self):
         self.popen('docker-compose up -d {0}'.format(self.container_name))
+
+
+class ContainerCommand(SubprocessTask):
+
+    def create_dependecies(self):
+        self.build_if(AlwaysTrue())
+
+    def build(self):
+        self.popen('docker-compose exec {0} {1}'.format(
+            self.container_name,
+            self.command))

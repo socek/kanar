@@ -4,6 +4,7 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
+from kbh.containers import BackendShell
 from kbh.containers import RunBackendContainer
 from kbh.containers import RunFrontendContainer
 from kbh.containers import RunNginxContainer
@@ -17,6 +18,7 @@ class KbhApplication(Application):
 
     containers = {
         'backend': RunBackendContainer,
+        'bshell': BackendShell,
         'nginx': RunNginxContainer,
         'frontend': RunFrontendContainer,
     }
