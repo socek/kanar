@@ -1,7 +1,5 @@
-from baelfire.dependencies import AlwaysTrue
 from baelfire.dependencies import FileChanged
 from baelfire.task import TemplateTask
-from baelfire.task.process import SubprocessTask
 
 
 class IniTemplate(TemplateTask):
@@ -28,17 +26,3 @@ class IniTemplate(TemplateTask):
             port=self.settings['db:port'],
             name=self.settings['db:name'])
         return context
-
-
-class RunDevServer(SubprocessTask):
-
-    def create_dependecies(self):
-        self.run_before(IniTemplate())
-
-        self.build_if(AlwaysTrue())
-
-    def build(self):
-        self.popen(
-            '{cmd} backend.ini --reload'.format(
-                cmd=self.paths.get('exe:pserve')),
-            cwd=self.paths.get('code'))

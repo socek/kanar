@@ -4,8 +4,7 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
-from kanar.commands.backend import IniTemplate
-from kanar.commands.backend import RunDevServer
+from kanar.commands.dev import RunDevServer
 from kanar.commands.core import BackendCore
 
 log = getLogger(__name__)
@@ -15,7 +14,6 @@ class BakendApplication(Application):
     core_cls = BackendCore
 
     tasks = {
-        'ini': IniTemplate,
         'dev': RunDevServer,
     }
 

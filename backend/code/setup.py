@@ -26,6 +26,7 @@ if __name__ == '__main__':
             ],
             'console_scripts': [
                 'backend = kanar.commands.cmd:run',
+                'balembic = kanar.commands.alembic:run_alembic',
             ]
         },
     )
