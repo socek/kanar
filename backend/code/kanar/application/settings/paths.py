@@ -33,3 +33,9 @@ def paths_setting(settings, paths):
 
         code.set('data', 'data')
         code.set('backend:ini', 'backend.ini')
+
+    with paths.set('root', '/usr/local/bin', is_root=True) as execs:
+        execs.set('exe:pserve', 'pserve')
+
+    with paths.set('logs', '/tmp', is_root=True) as logs:
+        logs.set('logs:all', 'all.log')

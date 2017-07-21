@@ -34,8 +34,6 @@ class KbhCore(Core):
                 nginx.set('nginx:dockerfile', 'Dockerfile')
                 nginx.set('nginx:conf', 'nginx.conf')
 
-        self.settings['package:name'] = 'kanar'
-
     def get_project_dir(self):
         project_dir = kbh.__file__
         for index in range(3):

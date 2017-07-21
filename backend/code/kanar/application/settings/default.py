@@ -3,10 +3,10 @@ from kanar.application.settings.paths import paths_setting
 
 def make_settings(settings, paths):
     project(settings, paths)
+    paths_setting(settings, paths)
     database(settings, paths)
     logger(settings, paths)
     debug(settings, paths)
-    paths_setting(settings, paths)
 
 
 def database(settings, paths):
@@ -26,6 +26,7 @@ def database(settings, paths):
 
 def project(settings, paths):
     settings['secret'] = 'asdasdasdasdweq312iuashi1u2h13o2'
+    settings['package:name'] = 'kanar'
 
 
 def debug(settings, paths):
@@ -70,7 +71,7 @@ def logger(settings, paths):
         },
         'handler_all': {
             'class': 'FileHandler',
-            'args': "('%%(log_all)s', 'a')",
+            'args': "('{}', 'a')".format(paths.get('logs:all')),
             'level': 'NOTSET',
             'formatter': 'generic',
         },

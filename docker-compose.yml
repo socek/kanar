@@ -5,7 +5,7 @@ services:
     tty: true
     volumes:
       - ./backend/code:/code
-    command: pserve backend.ini --reload
+    command: backend -t dev
     networks:
       kamar_net:
 
