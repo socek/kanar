@@ -4,24 +4,15 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
-from kbh.containers import BackendShell
-from kbh.containers import RunBackendContainer
-from kbh.containers import RunFrontendContainer
-from kbh.containers import RunNginxContainer
 from kbh.core import KbhCore
 
 log = getLogger(__name__)
 
 
-class KbhApplication(Application):
+class BaseApplication(Application):
     core_cls = KbhCore
-
-    containers = {
-        'backend': RunBackendContainer,
-        'bshell': BackendShell,
-        'nginx': RunNginxContainer,
-        'frontend': RunFrontendContainer,
-    }
+    tasks = dict()
+    tasks_help = None
 
     def create_parser(self):
         self.parser = ArgumentParser()
@@ -36,11 +27,9 @@ class KbhApplication(Application):
         )
 
         tasks.add_argument(
-            '-c',
-            '--container',
-            dest='container',
-            help='Start container.',
-            choices=self.containers.keys(),
+            'tasks',
+            help=self.tasks_help,
+            choices=self.tasks.keys(),
         )
         tasks.add_argument(
             '-g',
@@ -51,8 +40,8 @@ class KbhApplication(Application):
         )
 
     def run_command_or_print_help(self, args):
-        if args.container:
-            task = self.get_task(args.container)
+        if args.tasks:
+            task = self.get_task(args.tasks)
             try:
                 try:
                     task.run()
@@ -70,9 +59,5 @@ class KbhApplication(Application):
             if not self._run_missing_command():
                 self.parser.print_help()
 
-    def get_task(self, container):
-        return self.containers[container](self.core_cls())
-
-
-def run():
-    KbhApplication().run()
+    def get_task(self, task):
+        return self.tasks[task](self.core_cls())
