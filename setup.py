@@ -17,6 +17,7 @@ if __name__ == '__main__':
                 'container = rbh.cmd:containers',
                 'backend = rbh.cmd:backend',
                 'btest = rbh.cmd:pytest',
+                'balembic = rbh.cmd:alembic',
             ]
         },
     )

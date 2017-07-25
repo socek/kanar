@@ -1,5 +1,6 @@
 from sys import argv
 
+from rbh.backend import BackendAlembic
 from rbh.backend import BackendPytest
 from rbh.cmd.backend import BackendApplication
 from rbh.cmd.containers import ContainersApplication
@@ -16,3 +17,7 @@ def backend():
 
 def pytest():
     BackendPytest(KbhCore()).run(argv[1:])
+
+
+def alembic():
+    BackendAlembic(KbhCore()).run(argv[1:])

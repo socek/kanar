@@ -18,3 +18,9 @@ class BackendPytest(BackendContainerCommand):
     show_command_errors = False
     container_name = 'backend'
     command = 'btest'
+
+
+class BackendAlembic(BackendContainerCommand):
+    show_command_errors = False
+    container_name = 'backend'
+    command = 'balembic'
