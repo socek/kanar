@@ -1,6 +1,4 @@
-from baelfire.dependencies import AlwaysTrue
 from baelfire.dependencies import FileChanged
-from baelfire.dependencies import TaskRebuilded
 
 from rbh.docker import ContainerBuilder
 from rbh.docker import ContainerRunner
@@ -39,27 +37,28 @@ class NginxContainerBuild(ContainerBuilder):
 
 class RunBackendContainer(ContainerRunner):
     container_name = 'backend'
+    image_name = 'rotarran_backend'
 
     def create_dependecies(self):
-        self.build_if(TaskRebuilded(BackendContainerBuild()))
-        self.build_if(AlwaysTrue())
+        super().create_dependecies()
+        self.run_before(BackendContainerBuild())
 
 
 class RunFrontendContainer(ContainerRunner):
     container_name = 'frontend'
+    image_name = 'rotarran_frontend'
 
     def create_dependecies(self):
-        self.build_if(TaskRebuilded(FrontendContainerBuild()))
-        self.build_if(AlwaysTrue())
+        super().create_dependecies()
+        self.run_before(FrontendContainerBuild())
 
 
 class RunNginxContainer(ContainerRunner):
     container_name = 'nginx'
+    image_name = 'rotarran_nginx'
 
     def create_dependecies(self):
-        self.build_if(TaskRebuilded(BackendContainerBuild()))
-        self.build_if(TaskRebuilded(FrontendContainerBuild()))
-        self.build_if(TaskRebuilded(NginxContainerBuild()))
-        self.build_if(AlwaysTrue())
-
-
+        super().create_dependecies()
+        self.run_before(BackendContainerBuild())
+        self.run_before(FrontendContainerBuild())
+        self.run_before(NginxContainerBuild())

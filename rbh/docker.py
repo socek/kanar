@@ -4,6 +4,8 @@ from baelfire.task.file import FileTask
 from baelfire.task.process import CommandError
 from baelfire.task.process import SubprocessTask
 
+from rbh.dependecies import ContainerIsNotRunning
+
 
 class ContainerBuilder(FileTask, SubprocessTask):
 
@@ -22,6 +24,9 @@ class ContainerBuilder(FileTask, SubprocessTask):
 
 
 class ContainerRunner(SubprocessTask):
+
+    def create_dependecies(self):
+        self.build_if(ContainerIsNotRunning(self.image_name))
 
     def build(self):
         self.popen('docker-compose up -d {0}'.format(self.container_name))

@@ -3,6 +3,7 @@ from setuptools import setup
 
 install_requires = [
     'baelfire>=0.5.1',
+    'docker==2.4.2',
 ]
 
 if __name__ == '__main__':
