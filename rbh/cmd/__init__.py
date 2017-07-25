@@ -1,5 +1,9 @@
+from sys import argv
+
+from rbh.backend import BackendPytest
 from rbh.cmd.backend import BackendApplication
 from rbh.cmd.containers import ContainersApplication
+from rbh.core import KbhCore
 
 
 def containers():
@@ -8,3 +12,7 @@ def containers():
 
 def backend():
     BackendApplication().run()
+
+
+def pytest():
+    BackendPytest(KbhCore()).run(argv[1:])

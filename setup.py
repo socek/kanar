@@ -14,8 +14,9 @@ if __name__ == '__main__':
         license='Apache License 2.0',
         entry_points={
             'console_scripts': [
-                'container=rbh.cmd:containers',
-                'backend=rbh.cmd:backend',
+                'container = rbh.cmd:containers',
+                'backend = rbh.cmd:backend',
+                'btest = rbh.cmd:pytest',
             ]
         },
     )

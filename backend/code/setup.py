@@ -26,8 +26,9 @@ if __name__ == '__main__':
                 'main = rotarran:main'
             ],
             'console_scripts': [
-                'backend = rotarran.commands.cmd:run',
-                'balembic = rotarran.commands.alembic:run_alembic',
+                'backend = rotarran.commands.cmd:backend',
+                'balembic = rotarran.commands.cmd:alembic',
+                'btest = rotarran.commands.cmd:pytest',
             ]
         }
     )

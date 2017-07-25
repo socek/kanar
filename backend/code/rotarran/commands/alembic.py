@@ -1,18 +1,11 @@
-from sys import argv
-
 from baelfire.dependencies import AlwaysTrue
 from baelfire.task.process import CommandError
-from baelfire.task.process import SubprocessTask
 
-from rotarran.commands.backend import IniTemplate
-from rotarran.commands.core import BackendCore
 from rotarran.commands.dependecies import MigrationChanged
+from rotarran.commands.command import BaseCommand
 
 
-class Alembic(SubprocessTask):
-
-    def create_dependecies(self):
-        self.run_before(IniTemplate())
+class Alembic(BaseCommand):
 
     def alembic(self, command, *args, **kwargs):
         fullcommand = '{alembic} -c {ini} '.format(
@@ -37,13 +30,7 @@ class AlembicCommand(Alembic):
         self.build_if(AlwaysTrue())
 
     def build(self):
-        args = ''
-        for arg in argv[1:]:
-            if ' ' in arg:
-                args += '"{}" '.format(arg)
-            else:
-                args += arg + ' '
-        self.alembic(args)
+        self.alembic(self.args)
 
 
 class AlembicUpgrade(Alembic):
@@ -57,5 +44,3 @@ class AlembicUpgrade(Alembic):
         self.touch('sqlite_db')
 
 
-def run_alembic():
-    AlembicCommand(BackendCore()).run()

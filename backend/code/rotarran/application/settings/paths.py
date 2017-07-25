@@ -39,6 +39,7 @@ def paths_setting(settings, paths):
         execs.set('exe:pserve', 'pserve')
         execs.set('exe:pshell', 'pshell')
         execs.set('exe:alembic', 'alembic')
+        execs.set('exe:pytest', 'pytest')
 
     with paths.set('logs', '/tmp', is_root=True) as logs:
         logs.set('logs:all', 'all.log')

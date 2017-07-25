@@ -12,3 +12,9 @@ class BackendContainerCommand(ContainerCommand):
 class BackendShell(BackendContainerCommand):
     container_name = 'backend'
     command = 'backend -t shell'
+
+
+class BackendPytest(BackendContainerCommand):
+    show_command_errors = False
+    container_name = 'backend'
+    command = 'btest'
