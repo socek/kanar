@@ -4,7 +4,7 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
-from kbh.core import KbhCore
+from rbh.core import KbhCore
 
 log = getLogger(__name__)
 

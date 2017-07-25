@@ -9,7 +9,7 @@ services:
     depends_on:
       - postgres
     networks:
-      kamar_net:
+      rotarran_net:
 
   frontend:
     build: ./frontend
@@ -18,7 +18,7 @@ services:
       - ./frontend/code:/code
     command: npm run dev
     networks:
-      kamar_net:
+      rotarran_net:
 
   nginx:
     build: ./nginx
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./nginx/logs:/logs
     networks:
-      kamar_net:
+      rotarran_net:
         ipv4_address: 169.253.0.240
 
   postgres:
@@ -43,10 +43,10 @@ services:
       - POSTGRES_DB=rotarran
       - PGPASSWORD=rotarran
     networks:
-      kamar_net:
+      rotarran_net:
 
 networks:
-  kamar_net:
+  rotarran_net:
     driver: bridge
     ipam:
      config:

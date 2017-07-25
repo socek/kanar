@@ -1,5 +1,5 @@
-from kbh.cmd.backend import BackendApplication
-from kbh.cmd.containers import ContainersApplication
+from rbh.cmd.backend import BackendApplication
+from rbh.cmd.containers import ContainersApplication
 
 
 def containers():

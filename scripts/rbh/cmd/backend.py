@@ -1,5 +1,5 @@
-from kbh.cmd.app import BaseApplication
-from kbh.containers import BackendShell
+from rbh.cmd.app import BaseApplication
+from rbh.containers import BackendShell
 
 
 class BackendApplication(BaseApplication):

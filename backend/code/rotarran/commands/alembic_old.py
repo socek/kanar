@@ -5,9 +5,9 @@ from alembic.config import Config
 from baelfire.dependencies import AlwaysTrue
 from baelfire.task import Task
 
-from kbh.backend import IniTemplate
-from kbh.containers import RunBackendContainer
-from kbh.dependecies import MigrationChanged
+from rbh.backend import IniTemplate
+from rbh.containers import RunBackendContainer
+from rbh.dependecies import MigrationChanged
 
 log = getLogger(__name__)
 

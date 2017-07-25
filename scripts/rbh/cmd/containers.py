@@ -1,7 +1,7 @@
-from kbh.cmd.app import BaseApplication
-from kbh.containers import RunBackendContainer
-from kbh.containers import RunFrontendContainer
-from kbh.containers import RunNginxContainer
+from rbh.cmd.app import BaseApplication
+from rbh.containers import RunBackendContainer
+from rbh.containers import RunFrontendContainer
+from rbh.containers import RunNginxContainer
 
 
 class ContainersApplication(BaseApplication):
