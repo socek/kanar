@@ -67,3 +67,7 @@ class RunNginxContainer(ContainerRunner):
 class BackendShell(ContainerCommand):
     container_name = 'backend'
     command = 'backend -t shell'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+        self.run_before(RunBackendContainer())
