@@ -12,3 +12,8 @@ class FrontendContainerCommand(ContainerCommand):
 
 class FrontendBash(FrontendContainerCommand):
     command = 'bash'
+
+
+class FrontendTests(FrontendContainerCommand):
+    show_command_errors = False
+    command = 'npm test'

@@ -19,6 +19,7 @@ if __name__ == '__main__':
                 'backend = rbh.cmd:backend',
                 'btest = rbh.cmd:pytest',
                 'balembic = rbh.cmd:alembic',
+                'ftest = rbh.cmd:frontend_test',
             ]
         },
     )
