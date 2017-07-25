@@ -2,8 +2,6 @@ from os.path import dirname
 
 from baelfire.core import Core
 
-import rbh
-
 
 class KbhCore(Core):
 
@@ -35,7 +33,7 @@ class KbhCore(Core):
                 nginx.set('nginx:conf', 'nginx.conf')
 
     def get_project_dir(self):
-        project_dir = rbh.__file__
-        for index in range(3):
+        project_dir = __file__
+        for index in range(2):
             project_dir = dirname(project_dir)
         return project_dir
