@@ -1,5 +1,5 @@
 from rbh.cmd.app import BaseApplication
-from rbh.containers import BackendShell
+from rbh.backend import BackendShell
 
 
 class BackendApplication(BaseApplication):

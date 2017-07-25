@@ -29,5 +29,5 @@ if __name__ == '__main__':
                 'backend = rotarran.commands.cmd:run',
                 'balembic = rotarran.commands.alembic:run_alembic',
             ]
-        },
+        }
     )
