@@ -1,7 +1,7 @@
 from baelfire.dependencies import AlwaysTrue
 from baelfire.task.process import SubprocessTask
 
-from kanar.commands.alembic import AlembicUpgrade
+from rotarran.commands.alembic import AlembicUpgrade
 
 
 class Shell(SubprocessTask):

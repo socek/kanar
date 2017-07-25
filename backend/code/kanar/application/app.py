@@ -1,17 +1,17 @@
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
-from kanar.application.base.app import Application
-from kanar.application.db import DatabaseConfig
-from kanar.application.routing import KanarRouting
-from kanar.application.security import KanarFactory
+from rotarran.application.base.app import Application
+from rotarran.application.db import DatabaseConfig
+from rotarran.application.routing import RotarranRouting
+from rotarran.application.security import RotarranFactory
 
 
-class KanarApplication(Application):
+class RotarranApplication(Application):
 
     class Config(Application.Config):
-        routing_cls = KanarRouting
-        settings_module = 'kanar.application'
+        routing_cls = RotarranRouting
+        settings_module = 'rotarran.application'
 
     def _create_config(self):
         super()._create_config()
@@ -21,7 +21,7 @@ class KanarApplication(Application):
         authz_policy = ACLAuthorizationPolicy()
         self.config.set_authentication_policy(authn_policy)
         self.config.set_authorization_policy(authz_policy)
-        self.config.set_root_factory(KanarFactory)
+        self.config.set_root_factory(RotarranFactory)
 
         self.config.include('pyramid_debugtoolbar')
 

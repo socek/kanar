@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from kanar.application.base.controller import JsonController
+from rotarran.application.base.controller import JsonController
 
 log = getLogger(__name__)
 

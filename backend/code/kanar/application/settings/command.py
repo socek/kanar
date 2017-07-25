@@ -1,4 +1,4 @@
-from kanar.application.settings.local import database
+from rotarran.application.settings.local import database
 
 
 def make_settings(settings, paths):

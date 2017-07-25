@@ -1,3 +1,3 @@
-from kanar.application.app import KanarApplication
+from rotarran.application.app import RotarranApplication
 
-main = KanarApplication()
+main = RotarranApplication()

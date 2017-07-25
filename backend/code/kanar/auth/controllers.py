@@ -2,10 +2,10 @@ from pyramid.security import forget
 from pyramid.security import remember
 from sqlalchemy.orm.exc import NoResultFound
 
-from kanar.application.base.controller import FormController
-from kanar.application.base.controller import JsonController
-from kanar.auth.driver import UserReadDriver
-from kanar.auth.forms import LoginSchema
+from rotarran.application.base.controller import FormController
+from rotarran.application.base.controller import JsonController
+from rotarran.auth.driver import UserReadDriver
+from rotarran.auth.forms import LoginSchema
 
 
 class LoginController(FormController):

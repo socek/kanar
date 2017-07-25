@@ -1,4 +1,4 @@
-kanar.home.controllers:
+rotarran.home.controllers:
   -
     controller: HomeController
     route: home

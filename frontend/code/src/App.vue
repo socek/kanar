@@ -3,7 +3,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Kanar</a>
+          <a class="navbar-brand" href="#">Rotarran</a>
         </div>
         <login></login>
       </div>

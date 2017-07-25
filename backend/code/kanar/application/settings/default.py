@@ -1,4 +1,4 @@
-from kanar.application.settings.paths import paths_setting
+from rotarran.application.settings.paths import paths_setting
 
 
 def make_settings(settings, paths):
@@ -11,10 +11,10 @@ def make_settings(settings, paths):
 
 def database(settings, paths):
     settings['db:type'] = 'postgresql'
-    settings['db:login'] = 'kanar'
-    settings['db:password'] = 'kanar'
+    settings['db:login'] = 'rotarran'
+    settings['db:password'] = 'rotarran'
     settings['db:host'] = 'postgres'
-    settings['db:name'] = 'kanar'
+    settings['db:name'] = 'rotarran'
     settings['db:port'] = '5432'
     settings['db:options'] = {}
 
@@ -24,7 +24,7 @@ def database(settings, paths):
 
 def project(settings, paths):
     settings['secret'] = 'asdasdasdasdweq312iuashi1u2h13o2'
-    settings['package:name'] = 'kanar'
+    settings['package:name'] = 'rotarran'
 
 
 def debug(settings, paths):

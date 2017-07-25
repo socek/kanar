@@ -1,7 +1,7 @@
-from kanar.application.driver import ReadDriver
-from kanar.application.driver import WriteDriver
+from rotarran.application.driver import ReadDriver
+from rotarran.application.driver import WriteDriver
 
-from kanar.auth.models import User
+from rotarran.auth.models import User
 
 
 class UserReadDriver(ReadDriver):

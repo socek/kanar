@@ -1,8 +1,8 @@
-from kanar.menu.models import Menu
-from kanar.menu.models import MenuElement
+from rotarran.menu.models import Menu
+from rotarran.menu.models import MenuElement
 
 
-class KanarMenu(Menu):
+class RotarranMenu(Menu):
 
     def make_menu(self):
         with self.add('Dashboard') as main:

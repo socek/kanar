@@ -1,6 +1,6 @@
-# kanar
+# rotarran
 
-> Kanar Frontend
+> Rotarran Frontend
 
 ## Build Setup
 

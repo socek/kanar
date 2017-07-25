@@ -4,9 +4,9 @@ from baelfire.dependencies import AlwaysTrue
 from baelfire.task.process import CommandError
 from baelfire.task.process import SubprocessTask
 
-from kanar.commands.backend import IniTemplate
-from kanar.commands.core import BackendCore
-from kanar.commands.dependecies import MigrationChanged
+from rotarran.commands.backend import IniTemplate
+from rotarran.commands.core import BackendCore
+from rotarran.commands.dependecies import MigrationChanged
 
 
 class Alembic(SubprocessTask):

@@ -3,7 +3,7 @@ from pyramid.security import Authenticated
 from pyramid.security import Everyone
 
 
-class KanarFactory(object):
+class RotarranFactory(object):
     __acl__ = [
         (Allow, Everyone, 'view'),
         (Allow, Authenticated, 'create'),

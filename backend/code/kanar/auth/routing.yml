@@ -1,4 +1,4 @@
-kanar.auth.controllers:
+rotarran.auth.controllers:
   -
     controller: LoginController
     route: auth:login

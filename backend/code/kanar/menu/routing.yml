@@ -1,4 +1,4 @@
-kanar.menu.controllers:
+rotarran.menu.controllers:
   -
     controller: MenuController
     route: menu

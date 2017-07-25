@@ -5,7 +5,7 @@ from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
 
-from kanar.application.db import Model
+from rotarran.application.db import Model
 
 
 class User(Model):

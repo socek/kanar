@@ -1,7 +1,7 @@
 from pyramid.config import Configurator
 
-from kanar.application.base.routing import Routing
-from kanar.application.base.settings import SettingsFactory
+from rotarran.application.base.routing import Routing
+from rotarran.application.base.settings import SettingsFactory
 
 
 class Application(object):

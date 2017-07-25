@@ -4,9 +4,9 @@ from logging import getLogger
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 
-from kanar.commands.bshell import Shell
-from kanar.commands.core import BackendCore
-from kanar.commands.dev import RunDevServer
+from rotarran.commands.bshell import Shell
+from rotarran.commands.core import BackendCore
+from rotarran.commands.dev import RunDevServer
 
 log = getLogger(__name__)
 

@@ -1,8 +1,8 @@
-from kanar.application.base.controller import JsonController
-from kanar.menu.menu import KanarMenu
+from rotarran.application.base.controller import JsonController
+from rotarran.menu.menu import RotarranMenu
 
 
 class MenuController(JsonController):
 
     def make(self):
-        self.context['menu'] = KanarMenu(self.request).serialize()
+        self.context['menu'] = RotarranMenu(self.request).serialize()

@@ -1,7 +1,7 @@
-from kanar.application.base.routing import Routing
+from rotarran.application.base.routing import Routing
 
 
-class KanarRouting(Routing):
+class RotarranRouting(Routing):
 
     def make(self):
         super().make()

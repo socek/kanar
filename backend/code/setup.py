@@ -16,18 +16,18 @@ install_requires = [
 
 if __name__ == '__main__':
     setup(
-        name='kanar',
+        name='rotarran',
         version='0.1',
         packages=find_packages(),
         install_requires=install_requires,
         license='Apache License 2.0',
         entry_points={
             'paste.app_factory': [
-                'main = kanar:main'
+                'main = rotarran:main'
             ],
             'console_scripts': [
-                'backend = kanar.commands.cmd:run',
-                'balembic = kanar.commands.alembic:run_alembic',
+                'backend = rotarran.commands.cmd:run',
+                'balembic = rotarran.commands.alembic:run_alembic',
             ]
         },
     )

@@ -9,7 +9,7 @@ def paths_setting(settings, paths):
         return project_dir
 
     with paths.set('code', get_project_dir(4)) as code:
-        with code.set('src', 'kanar') as src:
+        with code.set('src', 'rotarran') as src:
             with src.set('app:application', 'application') as home:
                 with home.set('app:settings', 'settings') as settings_path:
                     settings_path.set('settings:command', 'command.py')

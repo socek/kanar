@@ -38,10 +38,10 @@ services:
       - ./data/postgres:/var/lib/postgresql/data
       - ./postgres:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_PASSWORD=kanar
-      - POSTGRES_USER=kanar
-      - POSTGRES_DB=kanar
-      - PGPASSWORD=kanar
+      - POSTGRES_PASSWORD=rotarran
+      - POSTGRES_USER=rotarran
+      - POSTGRES_DB=rotarran
+      - PGPASSWORD=rotarran
     networks:
       kamar_net:
 
