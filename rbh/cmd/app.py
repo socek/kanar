@@ -38,10 +38,11 @@ class BaseApplication(Application):
             help='Draw task dependency graph.',
             action="store_true",
         )
+        return tasks
 
     def run_command_or_print_help(self, args):
         if args.tasks:
-            task = self.get_task(args.tasks)
+            task = self.get_task(args.tasks, args)
             try:
                 try:
                     task.run()
@@ -59,5 +60,5 @@ class BaseApplication(Application):
             if not self._run_missing_command():
                 self.parser.print_help()
 
-    def get_task(self, task):
+    def get_task(self, task, args):
         return self.tasks[task](self.core_cls())

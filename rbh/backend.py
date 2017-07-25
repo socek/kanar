@@ -3,6 +3,7 @@ from rbh.docker import ContainerCommand
 
 
 class BackendContainerCommand(ContainerCommand):
+    container_name = 'backend'
 
     def create_dependecies(self):
         super().create_dependecies()
@@ -10,17 +11,18 @@ class BackendContainerCommand(ContainerCommand):
 
 
 class BackendShell(BackendContainerCommand):
-    container_name = 'backend'
     command = 'backend -t shell'
 
 
 class BackendPytest(BackendContainerCommand):
     show_command_errors = False
-    container_name = 'backend'
     command = 'btest'
 
 
 class BackendAlembic(BackendContainerCommand):
     show_command_errors = False
-    container_name = 'backend'
     command = 'balembic'
+
+
+class BackendBash(BackendContainerCommand):
+    command = 'bash'
