@@ -3,6 +3,7 @@ from baelfire.task.process import CommandError
 
 from rotarran.commands.dependecies import MigrationChanged
 from rotarran.commands.command import BaseCommand
+from rotarran.commands.psql import WaitForPsql
 
 
 class Alembic(BaseCommand):
@@ -26,7 +27,7 @@ class AlembicCommand(Alembic):
 
     def create_dependecies(self):
         super().create_dependecies()
-
+        self.run_before(WaitForPsql())
         self.build_if(AlwaysTrue())
 
     def build(self):
@@ -37,10 +38,9 @@ class AlembicUpgrade(Alembic):
 
     def create_dependecies(self):
         super().create_dependecies()
+        self.run_before(WaitForPsql())
         self.build_if(MigrationChanged('versions', 'sqlite_db'))
 
     def build(self):
         self.alembic('upgrade head')
         self.touch('sqlite_db')
-
-

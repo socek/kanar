@@ -12,10 +12,16 @@ class DatabaseConfig(object):
         self.settings = settings
 
     def build(self):
-        url = self.get_url()
-        engine = create_engine(url, **self.settings['db:options'])
-        self.config.registry.dbmaker = sessionmaker(bind=engine)
+        engine = self.get_engine()
+        self.config.registry.dbmaker = self.get_maker(engine)
         self.config.add_request_method(self.database, reify=True)
+
+    def get_engine(self):
+        url = self.get_url()
+        return create_engine(url, **self.settings['db:options'])
+
+    def get_maker(self, engine):
+        return sessionmaker(bind=engine)
 
     def database(self, request):
         maker = request.registry.dbmaker

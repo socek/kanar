@@ -7,6 +7,7 @@ from baelfire.application.commands.graph.graph import Graph
 from rotarran.commands.bshell import Shell
 from rotarran.commands.core import BackendCore
 from rotarran.commands.dev import RunDevServer
+from rotarran.commands.psql import WaitForPsql
 
 log = getLogger(__name__)
 
@@ -17,6 +18,7 @@ class BakendApplication(Application):
     tasks = {
         'dev': RunDevServer,
         'shell': Shell,
+        'psq': WaitForPsql,
     }
 
     def create_parser(self):
