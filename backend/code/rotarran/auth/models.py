@@ -10,7 +10,7 @@ from rotarran.application.db import Model
 
 class User(Model):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     password = Column(String(100), nullable=True)
 
