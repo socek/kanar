@@ -11,7 +11,7 @@ class BackendContainerCommand(ContainerCommand):
 
 
 class BackendShell(BackendContainerCommand):
-    command = 'backend -t shell'
+    command = 'backend shell'
 
 
 class BackendPytest(BackendContainerCommand):

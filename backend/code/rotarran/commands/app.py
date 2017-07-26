@@ -34,12 +34,11 @@ class BakendApplication(Application):
         )
 
         tasks.add_argument(
-            '-t',
-            '--task',
-            dest='task',
+            'task',
             help='Start task.',
             choices=self.tasks.keys(),
         )
+
         tasks.add_argument(
             '-g',
             '--graph',

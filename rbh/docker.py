@@ -32,6 +32,21 @@ class ContainerRunner(SubprocessTask):
         self.popen('docker-compose up -d {0}'.format(self.container_name))
 
 
+class ContainerLogs(SubprocessTask):
+
+    def create_dependecies(self):
+        self.build_if(AlwaysTrue())
+
+    def build(self):
+        try:
+            self.popen('docker-compose logs -f {0}'.format(self.container_name))
+        except KeyboardInterrupt:
+            pass
+
+    def _init_signals(self):
+        pass
+
+
 class ContainerCommand(SubprocessTask):
     show_command_errors = True
 

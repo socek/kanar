@@ -1,6 +1,7 @@
 from baelfire.dependencies import FileChanged
 
 from rbh.docker import ContainerBuilder
+from rbh.docker import ContainerLogs
 from rbh.docker import ContainerRunner
 
 
@@ -62,3 +63,27 @@ class RunNginxContainer(ContainerRunner):
         self.run_before(BackendContainerBuild())
         self.run_before(FrontendContainerBuild())
         self.run_before(NginxContainerBuild())
+
+
+class NginxLogs(ContainerLogs):
+    container_name = 'nginx'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+        self.run_before(RunNginxContainer())
+
+
+class BackendLogs(ContainerLogs):
+    container_name = 'backend'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+        self.run_before(RunBackendContainer())
+
+
+class FrontendLogs(ContainerLogs):
+    container_name = 'frontend'
+
+    def create_dependecies(self):
+        super().create_dependecies()
+        self.run_before(RunFrontendContainer())

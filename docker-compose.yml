@@ -5,7 +5,7 @@ services:
     tty: true
     volumes:
       - ./backend/code:/code
-    command: backend -t dev
+    command: backend dev
     depends_on:
       - postgres
     networks:
