@@ -42,6 +42,13 @@ if you want to start whole project, just type
 container nginx
 ```
 
+This console tool has 2 important switches:
+
+```
+-b, --bash            Start bash under running container.
+-o, --logs            Show logs of running container.
+```
+
 ### backend - running tools on backend container
 
 Use tools from backend container. For now we only have shell supported.
@@ -72,4 +79,47 @@ Use frontend tests, like it would be used, when the application were on host.
 
 ```
 ftest
+```
+
+## Avalible tools running under container
+
+### Backend
+
+#### backend tool
+
+```
+backend -h
+```
+
+This command line tool is for using pyramid tools.
+
+```
+backend dev - run dev server (default command of the container)
+backend shell - run dev shell
+```
+
+#### balembic
+
+balembic is a wrapper for alembic command. Alembic is for postgresql migration.
+If you want to migrate, just type:
+
+```
+balembic upgrade head
+```
+
+If you want to create new migration, just type:
+
+
+```
+balembic revision -m "comment"
+```
+
+For more documentation, go to http://alembic.zzzcomputing.com/en/latest/
+
+#### btest - pytest
+
+btest is a proxy for py.test command. For more info about py.test, see https://docs.pytest.org/en/latest/
+
+```
+btest -h
 ```
