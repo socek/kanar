@@ -16,13 +16,13 @@ class RotarranApplication(Application):
     def _create_config(self):
         super()._create_config()
 
-        # Security policies
+        self._setup_security()
+
+        DatabaseConfig(self.config, self.settings).build()
+
+    def _setup_security(self):
         authn_policy = AuthTktAuthenticationPolicy(self.settings['secret'])
         authz_policy = ACLAuthorizationPolicy()
         self.config.set_authentication_policy(authn_policy)
         self.config.set_authorization_policy(authz_policy)
         self.config.set_root_factory(RotarranFactory)
-
-        self.config.include('pyramid_debugtoolbar')
-
-        DatabaseConfig(self.config, self.settings).build()

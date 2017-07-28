@@ -1,3 +1,3 @@
-from rotarran.application.app import RotarranApplication
+from rotarran.application.app import RotarranApplication  # pragma: no cover
 
-main = RotarranApplication()
+main = RotarranApplication()  # pragma: no cover

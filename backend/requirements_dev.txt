@@ -47,3 +47,4 @@ wcwidth==0.1.7
 WebOb==1.7.3
 zope.deprecation==4.2.0
 zope.interface==4.4.2
+mock==2.0.0
